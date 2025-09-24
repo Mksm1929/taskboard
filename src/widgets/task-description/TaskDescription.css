@@ -1,0 +1,11 @@
+
+
+.task-description {
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: block;
+    text-align: center;
+    padding: 1px 10px;
+    word-break: break-all;
+}

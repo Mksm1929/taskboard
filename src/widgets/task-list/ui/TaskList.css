@@ -1,0 +1,24 @@
+.task-list {
+    display: flex;
+    flex-direction: column;
+    margin: 22px;
+    gap: 5px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 21px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: right;
+}
+.header-button {
+    display: flex;
+    justify-content: space-between;
+}

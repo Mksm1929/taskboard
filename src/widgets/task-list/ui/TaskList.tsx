@@ -1,22 +1,26 @@
 import {
+  addCategory,
   addTask,
-  delTask,
   setTask,
 } from "../../../entities/task/model/taskSlice";
 import type { Task } from "../../../shared/types/task";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Modal } from "../../../shared/ui/modal/Modal";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../app/providers/redux-hooks";
-import { TaskItem } from "../../../entities/task/ui/TaskItem";
+import "./TaskList.css"
+import { Field } from "../../../shared/ui/field/Field";
+import { useNavigate } from "react-router-dom";
+import { TaskListComponent } from "./TaskListComponent";
+
+
 
 export const TaskList = () => {
-  const tasks = useAppSelector((state) => state.tasks.tasks);
-  const task = useAppSelector((state) => state.tasks.task);
-  const categories = useAppSelector((state) => state.tasks.categories);
-  const id = useRef(1);
+  const task = useAppSelector((state) => state.app.task);
+  const categories = useAppSelector((state) => state.app.categories);
+  const id = useAppSelector((state) => state.app.id);
 
   const dispatch = useAppDispatch();
 
@@ -24,63 +28,81 @@ export const TaskList = () => {
     dispatch(setTask({ [field]: value }));
   };
 
-  const handleAddTask = () => {
-    id.current++;
-
-    const action = addTask({ ...task, id: id.current});
-
-    dispatch(action);
-  };
-
-  const handleDeleteTask = (task: Task) => {
-    const action = delTask(task.id);
-
-    dispatch(action);
-  };
-
   const [isOpen, setIsOpen] = useState(false);
 
   function clickOpenModal() {
     setIsOpen(true);
   }
-
   function clickCloseModal() {
     setIsOpen(false);
   }
 
+  const [isOpenAddCategory, setIsOpenAddCategory] = useState(false);
+
+  function clickAddCategory() {
+    setIsOpenAddCategory(true);
+  }
+  function clickCloseCategory() {
+    setIsOpenAddCategory(false);
+  }
+
+  const handleAddTask = () => {
+    const action = addTask({ ...task, id: id });
+    if (task.title !== "") {
+
+      dispatch(action);
+      clickCloseModal();
+    }
+  };
+
+  const navigate = useNavigate();
+  const handleClickCategories = () => navigate("/categories");
+
+
   return (
     <div>
-      <div>
-        {tasks.map((task) => (
-          <TaskItem task={task} onDelete={handleDeleteTask} />
-        ))}
+      <div className="header-button">
+        <button onClick={clickOpenModal}>Добавить задачу</button>
+        
+        <button onClick={handleClickCategories}>Категории</button>
       </div>
-      <button onClick={clickOpenModal}>Добавить задачу</button>
-      <ul>
+      <TaskListComponent />
 
-      </ul>
-      <Modal isOpen={isOpen} onClose={() => {}}>
+      <Modal isOpen={isOpen}>
         <div>
-          <h1>{"Спланирую день!"}</h1>
-          <div>
-            <input
-              value={task.title}
-              onChange={(e) => handleSetTask("title", e.target.value)}
-              placeholder="введите  задачу"
-            />
+          <div className="modal-header">Добавление задачи</div>
 
-            <select
-              defaultValue={categories[0]}
-              value={task.category}
-              onChange={(e) => handleSetTask("category", e.target.value)}
-            >
-              {categories.map((e) => (
-                <option>{e}</option>
-              ))}
-            </select>
-          </div>
           <div>
-            <button onClick={handleAddTask}>сохранить</button>
+
+            <Field title="Название">
+              <input
+                value={task.title}
+                onChange={(e) => handleSetTask("title", e.target.value)}
+                placeholder="Введите  задачу"
+              />
+            </Field>
+            <Field title="Категория">
+              <select
+                defaultValue={categories[0]}
+                value={task.category}
+                onChange={(e) => handleSetTask("category", e.target.value)}
+              >
+                {categories.map((e) => (
+                  <option>{e}</option>
+                ))}
+              </select>
+            </Field>
+
+            <Field title="Описание">
+              <textarea
+                value={task.description}
+                onChange={(e) => handleSetTask("description", e.target.value)}
+              />
+            </Field>
+
+          </div>
+          <div className="modal-buttons">
+            <button disabled={task.title === ''} onClick={handleAddTask}>сохранить</button>
             <button onClick={clickCloseModal}>отмена</button>
           </div>
         </div>
@@ -90,10 +112,5 @@ export const TaskList = () => {
 };
 
 /* 
-  Сделать добавление таски в модальном окне <Modal>
-  На главном экране должны остаться только список задач и кнопка "Добавить задачу"
-  В модальном окне должны быть поля для создания задача и кнопка "Сохранить" и "Отмена" - закрывает модальное окно
-
-  Категорию переделать на выпадающий список, там должны быть "Дом", "Работа", "Гараж"
-  использовать <select> и <option> 
-  */
+  
+*/
