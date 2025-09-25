@@ -5,6 +5,10 @@
     gap: 5px;
 }
 
+.modal {
+    background-color: rgb(112, 156, 212);
+}
+
 .modal-header {
     display: flex;
     justify-content: center;
@@ -14,10 +18,12 @@
 }
 
 .modal-buttons {
+    margin-top: 20px;
     display: flex;
     gap: 10px;
     justify-content: right;
 }
+
 .header-button {
     display: flex;
     justify-content: space-between;

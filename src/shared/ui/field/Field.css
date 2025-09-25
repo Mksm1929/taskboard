@@ -1,0 +1,38 @@
+.container {
+    padding: 3px;
+    font-size: 0.7rem;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.container input {
+    border: unset;
+    padding: 0px 5px;
+    width: calc(100% - 10px);
+}
+
+.container input:focus-visible {
+    outline: unset;
+}
+
+.container textarea {
+    border: unset;
+    padding: 0px 5px;
+    width: calc(100% - 10px)
+}
+
+.container textarea:focus-visible {
+    outline: unset;
+}
+
+.container select {
+    border: unset;
+    padding: 0px 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.container select:focus-visible {
+    outline: unset;
+}
