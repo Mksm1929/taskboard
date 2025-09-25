@@ -1,10 +1,12 @@
+import { Router } from "./providers/router";
 
-import { TaskList } from "../widgets/task-list/ui/TaskList";
+
+
 
 function App() {
 
   return <div>
-    <TaskList />
+    <Router />
   </div>;
 }
 
