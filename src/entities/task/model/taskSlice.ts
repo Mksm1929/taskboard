@@ -1,6 +1,7 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
 import type { Task } from "../../../shared/types/task";
 
+
 export interface CounterState {
   tasks: Task[];
   categories: string[];

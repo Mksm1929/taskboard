@@ -28,7 +28,7 @@ export const TaskItem = (props: Props) => {
   }
 
   const isDone = props.task.isDone;
-  const styleTaskItem = () => isDone ? 'rgba(255, 173, 173, 1)' : 'white';
+  const styleTaskItem = () => isDone ? 'rgba(0, 248, 95, 1)' : 'white';
 
   return (
     <div style={{ backgroundColor: styleTaskItem() }} onClick={handleClickItem} className="task-item">
@@ -48,8 +48,3 @@ export const TaskItem = (props: Props) => {
     </div>
   );
 };
-
-/*
-  ПРи нажатии на задачу, должен меняться статус на противоположный (уже сделали, осталось диспатч экшена сделать)
-  Нужно визуально пометить выполненные задачи, например сделать серый фон у всей задачи
-*/

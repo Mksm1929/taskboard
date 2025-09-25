@@ -6,7 +6,6 @@ import type { Task } from "../../../shared/types/task";
 import "./TaskList.css";
 
 
-
 export const TaskListComponent = () => {
     const tasks = useAppSelector((state) => state.app.tasks);
     const { category } = useParams();

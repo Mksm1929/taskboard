@@ -1,5 +1,4 @@
 import {
-  addCategory,
   addTask,
   setTask,
 } from "../../../entities/task/model/taskSlice";
@@ -22,7 +21,11 @@ export const TaskList = () => {
   const categories = useAppSelector((state) => state.app.categories);
   const id = useAppSelector((state) => state.app.id);
 
+  const navigate = useNavigate();
+  const handleClickCategories = () => navigate("/categories");
+
   const dispatch = useAppDispatch();
+
 
   const handleSetTask = (field: keyof Task, value: string) => {
     dispatch(setTask({ [field]: value }));
@@ -37,15 +40,6 @@ export const TaskList = () => {
     setIsOpen(false);
   }
 
-  const [isOpenAddCategory, setIsOpenAddCategory] = useState(false);
-
-  function clickAddCategory() {
-    setIsOpenAddCategory(true);
-  }
-  function clickCloseCategory() {
-    setIsOpenAddCategory(false);
-  }
-
   const handleAddTask = () => {
     const action = addTask({ ...task, id: id });
     if (task.title !== "") {
@@ -55,32 +49,32 @@ export const TaskList = () => {
     }
   };
 
-  const navigate = useNavigate();
-  const handleClickCategories = () => navigate("/categories");
 
+  const requiredInputField = task.title === "" ? { color: 'red', fontSize: '13px', paddingLeft: '10px' } : { display: 'none' };
 
   return (
     <div>
       <div className="header-button">
         <button onClick={clickOpenModal}>Добавить задачу</button>
-        
         <button onClick={handleClickCategories}>Категории</button>
       </div>
       <TaskListComponent />
 
       <Modal isOpen={isOpen}>
-        <div>
+        <div className="modal">
           <div className="modal-header">Добавление задачи</div>
 
-          <div>
-
+          <div className="container-fild">
             <Field title="Название">
               <input
                 value={task.title}
                 onChange={(e) => handleSetTask("title", e.target.value)}
-                placeholder="Введите  задачу"
+                placeholder="Введите  задачу..."
               />
             </Field>
+
+            <div style={requiredInputField}>Обязательное поле.</div>
+
             <Field title="Категория">
               <select
                 defaultValue={categories[0]}
@@ -110,7 +104,3 @@ export const TaskList = () => {
     </div>
   );
 };
-
-/* 
-  
-*/
