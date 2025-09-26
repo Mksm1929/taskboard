@@ -21,7 +21,9 @@
 .container textarea {
     border: unset;
     padding: 0px 5px;
-    width: calc(100% - 10px)
+    width: calc(100% - 10px);
+    resize: vertical;
+
 }
 
 .container textarea:focus-visible {
@@ -32,7 +34,6 @@
     border: unset;
     padding: 0px 5px;
     width: 100%;
-    text-align: center;
 }
 
 .container select:focus-visible {

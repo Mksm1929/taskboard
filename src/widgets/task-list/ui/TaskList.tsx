@@ -13,6 +13,7 @@ import "./TaskList.css"
 import { Field } from "../../../shared/ui/field/Field";
 import { useNavigate } from "react-router-dom";
 import { TaskListComponent } from "./TaskListComponent";
+import { Textarea } from "../../../shared/ui/textarea/Textarea";
 
 
 
@@ -61,7 +62,7 @@ export const TaskList = () => {
       <TaskListComponent />
 
       <Modal isOpen={isOpen}>
-        <div className="modal">
+        <div>
           <div className="modal-header">Добавление задачи</div>
 
           <div className="container-fild">
@@ -88,10 +89,7 @@ export const TaskList = () => {
             </Field>
 
             <Field title="Описание">
-              <textarea
-                value={task.description}
-                onChange={(e) => handleSetTask("description", e.target.value)}
-              />
+              <Textarea />
             </Field>
 
           </div>

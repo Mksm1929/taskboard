@@ -5,10 +5,6 @@
     gap: 5px;
 }
 
-.modal {
-    background-color: rgb(112, 156, 212);
-}
-
 .modal-header {
     display: flex;
     justify-content: center;
