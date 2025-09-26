@@ -4,6 +4,9 @@ import { useAppDispatch } from "../../../app/providers/redux-hooks";
 import type { Task } from "../../../shared/types/task";
 import { changeTaskStatus } from "../model/taskSlice";
 import "./TaskItem.css";
+import { Modal } from "../../../shared/ui/modal/Modal";
+import { useRef, useState } from "react";
+
 
 type Props = {
   task: Task;
@@ -11,8 +14,18 @@ type Props = {
   category?: string;
 };
 
+
 export const TaskItem = (props: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const clickOpenModal = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    setIsOpen(true);
+  }
+  const clickCloseModal = () => setIsOpen(false);
+
   const navigate = useNavigate();
+
   const handleDelete = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
     props.onDelete(props.task);
@@ -34,12 +47,20 @@ export const TaskItem = (props: Props) => {
     <div style={{ backgroundColor: styleTaskItem() }} onClick={handleClickItem} className="task-item">
       <div className="task-item-header">
         <div className="task-item-header-title">
-          <div>{props.task.id}</div>
-          <div>{props.task.title}</div>
+          {`${props.task.id}    ${props.task.title}`}
         </div>
-        <div onClick={handleDelete} className="task-item-header-close">
+        <div onClick={clickOpenModal} className="task-item-header-close">
           <span>x</span>
         </div>
+        <Modal isOpen={isOpen}>
+          <div>
+            <h1>Вы действительно хотите удалить?</h1>
+          </div>
+          <div>
+            <button onClick={handleDelete}>Да</button>
+            <button onClick={clickCloseModal}>Нет</button>
+          </div>
+        </Modal>
       </div>
       <div>{props.task.category}</div>
       <div className="task-item-checkbox">

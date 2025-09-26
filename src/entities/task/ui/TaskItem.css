@@ -10,8 +10,11 @@
 }
 
 .task-item-header-title {
-    display: flex;
-    gap: 5px;
+    max-width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: auto;
 }
 
 .task-item-header-close {
@@ -30,8 +33,7 @@
 }
 
 .task-item-checkbox {
-    display: flex;
-    justify-content: right;
+    text-align: right;
 }
 
 .task-item-checkbox-pointer {
