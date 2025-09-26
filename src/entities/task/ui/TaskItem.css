@@ -39,3 +39,9 @@
 .task-item-checkbox-pointer {
     cursor: pointer;
 }
+
+.modal-button {
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+}

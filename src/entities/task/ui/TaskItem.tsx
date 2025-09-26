@@ -26,7 +26,7 @@ export const TaskItem = (props: Props) => {
 
   const navigate = useNavigate();
 
-  const handleDelete = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleDelete = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
     props.onDelete(props.task);
   };
@@ -54,9 +54,9 @@ export const TaskItem = (props: Props) => {
         </div>
         <Modal isOpen={isOpen}>
           <div>
-            <h1>Вы действительно хотите удалить?</h1>
+            <h1>Вы действительно хотите удалить задачу?</h1>
           </div>
-          <div>
+          <div className="modal-button">
             <button onClick={handleDelete}>Да</button>
             <button onClick={clickCloseModal}>Нет</button>
           </div>
@@ -69,6 +69,3 @@ export const TaskItem = (props: Props) => {
     </div>
   );
 };
-
-// в главную ветку не подтягиваются изменения, так как ошибка онклика
-
