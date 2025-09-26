@@ -5,7 +5,7 @@ import type { Task } from "../../../shared/types/task";
 import { changeTaskStatus } from "../model/taskSlice";
 import "./TaskItem.css";
 import { Modal } from "../../../shared/ui/modal/Modal";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 
 type Props = {
@@ -36,7 +36,7 @@ export const TaskItem = (props: Props) => {
   const dispatch = useAppDispatch();
 
   const handleChangeStatus = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation()
+    e.stopPropagation();
     dispatch(changeTaskStatus(props.task.id));
   }
 
@@ -69,3 +69,6 @@ export const TaskItem = (props: Props) => {
     </div>
   );
 };
+
+// в главную ветку не подтягиваются изменения, так как ошибка онклика
+
