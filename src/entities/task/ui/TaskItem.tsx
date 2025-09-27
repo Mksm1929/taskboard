@@ -5,7 +5,7 @@ import type { Task } from "../../../shared/types/task";
 import { changeTaskStatus } from "../model/taskSlice";
 import "./TaskItem.css";
 import { Modal } from "../../../shared/ui/modal/Modal";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 
 type Props = {
@@ -26,7 +26,7 @@ export const TaskItem = (props: Props) => {
 
   const navigate = useNavigate();
 
-  const handleDelete = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleDelete = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.stopPropagation();
     props.onDelete(props.task);
   };
@@ -36,7 +36,7 @@ export const TaskItem = (props: Props) => {
   const dispatch = useAppDispatch();
 
   const handleChangeStatus = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation()
+    e.stopPropagation();
     dispatch(changeTaskStatus(props.task.id));
   }
 
@@ -54,9 +54,9 @@ export const TaskItem = (props: Props) => {
         </div>
         <Modal isOpen={isOpen}>
           <div>
-            <h1>Вы действительно хотите удалить?</h1>
+            <h1>Вы действительно хотите удалить задачу?</h1>
           </div>
-          <div>
+          <div className="modal-button">
             <button onClick={handleDelete}>Да</button>
             <button onClick={clickCloseModal}>Нет</button>
           </div>
