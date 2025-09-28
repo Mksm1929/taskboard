@@ -4,21 +4,24 @@ import "./Categories.css";
 import { useAppDispatch, useAppSelector } from "../../app/providers/redux-hooks";
 import { useState } from "react";
 import { Modal } from "../../shared/ui/modal/Modal";
-import { addCategory } from "../../entities/task/model/taskSlice";
+import { addCategory, setCategory } from "../../entities/category/model/actions";
+import { Field } from "../../shared/ui/field/Field";
+
 
 
 export const Categories = () => {
-    const categories = useAppSelector((state) => state.app.categories);
-    const tasks = useAppSelector((state) => state.app.tasks);
+    const categories = useAppSelector((state) => state.categories.categories);
+    const tasks = useAppSelector((state) => state.tasks.tasks);
+    const category = useAppSelector((state) => state.categories.category);
     const dispatch = useAppDispatch();
+    const [isOpenAddCategory, setIsOpenAddCategory] = useState(false);
+    const navigate = useNavigate();
 
     const getTask = (category: string) => tasks.find((e) => e.category === category);
 
     const filteredCategories = categories.filter((cat) => getTask(cat));
 
-    const navigate = useNavigate();
     const handleClickBack = () => navigate(`/`);
-    const [isOpenAddCategory, setIsOpenAddCategory] = useState(false);
 
     function clickAddCategory() {
         setIsOpenAddCategory(true);
@@ -27,15 +30,11 @@ export const Categories = () => {
         setIsOpenAddCategory(false);
     }
 
-    const [category, setCategory] = useState('');
-
     const handleClickAddCategory = () => {
         const action = addCategory(category);
 
         if (category !== '') {
-
             dispatch(action);
-            setCategory('');
             clickCloseCategory();
         }
     }
@@ -46,15 +45,14 @@ export const Categories = () => {
             <button onClick={handleClickBack}>Назад</button>
             <button onClick={clickAddCategory}>Добавить категорию</button>
         </div>
-        <Modal isOpen={isOpenAddCategory}>
+        <Modal heading="Добавить категорию" onClose={clickCloseCategory} isOpen={isOpenAddCategory}>
             <div>
-                <div className="modal-header">
-                    Добавить категорию
-                </div>
-                <input
-                    value={category}
-                    onChange={e => setCategory(e.target.value)}
-                    placeholder="Введите  категорию" />
+                <Field title="Категория">
+                    <input
+                        value={category}
+                        onChange={e => dispatch(setCategory(e.target.value))}
+                        placeholder="Введите  категорию" />
+                </Field>
             </div>
             <div className="modal-categories-button">
                 <button onClick={handleClickAddCategory} disabled={category === ''}>сохранить</button>
@@ -63,7 +61,7 @@ export const Categories = () => {
         </Modal>
         <div className="categories">
             {filteredCategories.map((e) => (
-                <button onClick={() => navigate(`${e}`)}>{e}</button>
+                <button key={'key'} onClick={() => navigate(`${e}`)}>{e}</button>
             ))}
         </div>
     </div>

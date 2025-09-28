@@ -7,10 +7,10 @@ export const TaskDescription = () => {
     const { id } = useParams();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
-    const tasks = useAppSelector((state) => state.app.tasks);
+    const tasks = useAppSelector((state) => state.tasks.tasks);
     const task = tasks.find((e) => e.id === Number(id));
     const category = searchParams.get('category'); // 'Дом' || null
-    const handleClickBack = () => category ? navigate(`/categories/${category}`) : navigate('/');
+     const handleClickBack = () => category ? navigate(`/categories/${category}`) : navigate('/');
 
     return <div className="task">
         <button onClick={handleClickBack}>Назад</button>

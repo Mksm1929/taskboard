@@ -1,7 +1,7 @@
 import {
   addTask,
   setTask,
-} from "../../../entities/task/model/taskSlice";
+} from "../../../entities/task/model/actions";
 import type { Task } from "../../../shared/types/task";
 import { useState } from "react";
 import { Modal } from "../../../shared/ui/modal/Modal";
@@ -18,25 +18,23 @@ import { Textarea } from "../../../shared/ui/textarea/Textarea";
 
 
 export const TaskList = () => {
-  const task = useAppSelector((state) => state.app.task);
-  const categories = useAppSelector((state) => state.app.categories);
-  const id = useAppSelector((state) => state.app.id);
-
+  const task = useAppSelector((state) => state.tasks.task);
+  const categories = useAppSelector((state) => state.categories.categories);
+  const id = useAppSelector((state) => state.tasks.id);
   const navigate = useNavigate();
-  const handleClickCategories = () => navigate("/categories");
-
   const dispatch = useAppDispatch();
+  const [isOpen, setIsOpen] = useState(false);
 
+  const handleClickCategories = () => navigate("/categories");
 
   const handleSetTask = (field: keyof Task, value: string) => {
     dispatch(setTask({ [field]: value }));
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-
   function clickOpenModal() {
     setIsOpen(true);
   }
+
   function clickCloseModal() {
     setIsOpen(false);
   }
@@ -44,12 +42,10 @@ export const TaskList = () => {
   const handleAddTask = () => {
     const action = addTask({ ...task, id: id });
     if (task.title !== "") {
-
       dispatch(action);
       clickCloseModal();
     }
   };
-
 
   const requiredInputField = task.title === "" ? { color: 'red', fontSize: '13px', paddingLeft: '10px' } : { display: 'none' };
 
@@ -61,10 +57,8 @@ export const TaskList = () => {
       </div>
       <TaskListComponent />
 
-      <Modal isOpen={isOpen}>
+      <Modal heading="Добавление задачи" onClose={clickCloseModal} isOpen={isOpen}>
         <div>
-          <div className="modal-header">Добавление задачи</div>
-
           <div className="container-fild">
             <Field title="Название">
               <input
@@ -79,17 +73,17 @@ export const TaskList = () => {
             <Field title="Категория">
               <select
                 defaultValue={categories[0]}
-                value={task.category}
+                // value={task.category}
                 onChange={(e) => handleSetTask("category", e.target.value)}
               >
                 {categories.map((e) => (
-                  <option>{e}</option>
+                  <option key={e}>{e}</option>
                 ))}
               </select>
             </Field>
 
             <Field title="Описание">
-              <Textarea />
+              <Textarea value={task.description} onChange={(v) => handleSetTask('description', v)} />
             </Field>
 
           </div>
