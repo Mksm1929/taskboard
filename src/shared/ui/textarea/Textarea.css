@@ -1,3 +1,15 @@
 .textarea {
     overflow: hidden;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: rgb(221, 221, 221);
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 1px solid black;
+}

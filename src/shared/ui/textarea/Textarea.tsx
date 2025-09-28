@@ -1,7 +1,17 @@
+import { useEffect, useState } from "react";
 import "./Textarea.css";
 
 
-export const Textarea = () => {
+type Props = {
+    value: string,
+    onChange: (value: string) => void,
+};
+
+export const Textarea = (props: Props) => {
+    const [value, setValue] = useState(props.value);
+    useEffect(() => {
+        props.onChange(value);
+    }, [value]);
 
     const onKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.currentTarget.scrollTop > 0) {
@@ -10,5 +20,5 @@ export const Textarea = () => {
         }
     }
 
-    return <textarea className="textarea" onInput={onKeyUp} />
+    return <textarea value={value} onChange={(e) => setValue(e.target.value)} className="textarea" onInput={onKeyUp} />
 }

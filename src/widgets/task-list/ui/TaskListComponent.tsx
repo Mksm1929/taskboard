@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/providers/redux-hooks";
-import { delTask } from "../../../entities/task/model/taskSlice";
+import { delTask } from "../../../entities/task/model/actions";
 import { TaskItem } from "../../../entities/task/ui/TaskItem";
 import type { Task } from "../../../shared/types/task";
 import "./TaskList.css";
 
 
 export const TaskListComponent = () => {
-    const tasks = useAppSelector((state) => state.app.tasks);
+    const tasks = useAppSelector((state) => state.tasks.tasks);
     const { category } = useParams();
 
     const filteredTasks = tasks.filter((e) => e.category === category);
@@ -22,7 +22,7 @@ export const TaskListComponent = () => {
 
     return <div className="task-list">
         {(category ? filteredTasks : tasks).map((task) => (
-            <TaskItem category={category} task={task} onDelete={handleDeleteTask} />
+            <TaskItem key={'key1'} category={category} task={task} onDelete={handleDeleteTask} />
         ))}
     </div>
 }

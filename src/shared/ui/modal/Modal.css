@@ -15,7 +15,7 @@
   max-height: 90vh;
   overflow: auto;
   background: white;
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
   border-radius: 8px;
   min-width: 300px;
   position: relative;
@@ -23,12 +23,43 @@
   background-color: rgb(221, 221, 221);
 }
 
-.close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
+
+.modal-close {
+  display: inline;
+  float: right;
+  position: relative;
+  left: 8px;
   background: transparent;
-  border: none;
   font-size: 24px;
   cursor: pointer;
+  text-align: center;
+  transition: border-color 0.25s;
+  border: 1px solid transparent;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.modal-close span {
+  position: relative;
+  bottom: 6px;
+}
+
+.modal-close:hover {
+  color: #ff0000;
+  background-color: rgb(241, 241, 241);
+}
+
+.modal-close:focus,
+.modal-close:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-size: 15px;
 }
