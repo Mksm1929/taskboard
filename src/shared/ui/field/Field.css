@@ -23,7 +23,6 @@
     padding: 0px 5px;
     width: calc(100% - 10px);
     resize: vertical;
-
 }
 
 .container textarea:focus-visible {
@@ -38,4 +37,10 @@
 
 .container select:focus-visible {
     outline: unset;
+}
+
+.container .container-required {
+    color: red; 
+    font-size: 13px; 
+    padding-left: 10px;
 }

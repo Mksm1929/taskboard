@@ -1,15 +1,14 @@
 import { Route, Routes } from "react-router-dom";
-import { TaskList } from "../../widgets/task-list/ui/TaskList";
+import { TasksListPage } from "../../pages/TasksList/TasksListPage";
 import { TaskDescription } from "../../widgets/task-description/TaskDescription";
-import { Categories } from "../../widgets/categories/Categories";
+import { CategoriesPage } from "../../pages/CategoriesPage/CategoriesPage";
 import { TaskListCategory } from "../../widgets/task-list-category/TaskListCategory";
 
 
 export const Router = () => {
-
     return <Routes>
-        <Route path="/" element={<TaskList />} />
-        <Route path="/categories" element={<Categories />} />
+        <Route path="/" element={<TasksListPage />} />
+        <Route path="/categories" element={<CategoriesPage />} />
         <Route path="/categories/:category" element={<TaskListCategory />} />
         <Route path="/:id" element={<TaskDescription />} />
     </Routes>

@@ -1,6 +1,6 @@
 import "./Modal.css";
 
-interface ModalProps {
+type ModalProps = {
   isOpen: boolean;
   children: React.ReactNode;
   heading: string;
@@ -8,9 +8,7 @@ interface ModalProps {
 }
 
 
-export const Modal: React.FC<ModalProps> = ({ isOpen, children, heading, onClose }) => {
-
-
+export const Modal = ({ isOpen, children, heading, onClose }: ModalProps) => {
   if (!isOpen) return null;
 
   return (

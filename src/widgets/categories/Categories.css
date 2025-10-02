@@ -1,18 +1,32 @@
+.categories {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px 100px;
+    gap: 10px;
+    margin-left: 30px;
+}
+
+.categories-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.categories-header-button {
+    display: flex;
+    gap: 10px;
+}
+
+.categories-header-checkbox {
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0px 5px 0px 5px;
+}
+
 .modal-categories-button {
     display: flex;
     gap: 10px;
     justify-content: right;
     margin-top: 10px;
-}
-
-.categories-button {
-    display: flex;
-    gap:10px;
-}
-
-.categories {
-    margin-top: 10px;
-    display: flex;
-    gap: 30px;
-    margin-left: 30px;
 }

@@ -2,11 +2,17 @@
     border-radius: 8px;
     border: 1px solid black;
     padding: 5px 5px 5px 10px;
+    background-color: white;
 }
 
+.task-item-done {
+    background-color: rgba(0, 248, 95, 1);
+}
+.task-item-done .task-item-header-title { text-decoration: line-through;}
+
 .task-item-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
 }
 
 .task-item-header-title {
@@ -26,6 +32,12 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    background-color: white;
+}
+
+.task-item-header-close span {
+    position: relative;
+    bottom: 1.9px;
 }
 
 .task-item-header-close:hover {
