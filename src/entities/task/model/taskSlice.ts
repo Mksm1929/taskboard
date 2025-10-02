@@ -4,13 +4,13 @@ import { CATEGORIES } from "../../category/model/сategorySlice";
 import { addTask, changeTaskStatus, delTask, setTask } from "./actions";
 
 
-export interface CounterState {
+export interface TaskState {
   tasks: Task[];
   id: number;
   task: Task;
 }
 
-const initialState: CounterState = {
+const initialState: TaskState = {
   tasks: [],
   id: 1,
   task: {

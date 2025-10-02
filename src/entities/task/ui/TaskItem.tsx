@@ -23,6 +23,7 @@ export const TaskItem = (props: Props) => {
     e.stopPropagation();
     setIsOpen(true);
   }
+
   const clickCloseModal = () => setIsOpen(false);
 
   const navigate = useNavigate();
@@ -40,16 +41,17 @@ export const TaskItem = (props: Props) => {
   }
 
   const isDone = props.task.isDone;
-  const styleTaskItem = () => isDone ? 'rgba(0, 248, 95, 1)' : 'white';
+  const displayTaskItem = `task-item ${isDone ? 'task-item-done': ''} `;
+
 
   return (
-    <div style={{ backgroundColor: styleTaskItem() }} onClick={handleClickItem} className="task-item">
+    <div onClick={handleClickItem} className={displayTaskItem}>
       <div className="task-item-header">
         <div className="task-item-header-title">
           {`${props.task.id}    ${props.task.title}`}
         </div>
         <div onClick={clickOpenModal} className="task-item-header-close">
-          <span>x</span>
+          <span>×</span>
         </div>
         <Modal heading="Вы действительно хотите удалить задачу?" onClose={clickCloseModal} isOpen={isOpen}>
           <div className="modal-button">
